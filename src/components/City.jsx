@@ -24,6 +24,7 @@ function City() {
 
   return (
     <div className={styles.city}>
+      <h1>{x.id}</h1>
       <div className={styles.row}>
         <h6>City name</h6>
         <h3>
