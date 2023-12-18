@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import CityList from "./components/CityList";
 import Spinner from "./components/Spinner";
 import CountryList from "./components/CountryList";
+import City from "./components/City";
 
 const SERVER_URL = "http://localhost:9000";
 
@@ -57,6 +58,11 @@ function App() {
             path="cities"
             element={isLoading ? <Spinner /> : <CityList cities={cities} />}
           />
+          <Route
+            path="cities/:id"
+            element={isLoading ? <Spinner /> : <City />}
+          />
+
           <Route
             path="countries"
             element={isLoading ? <Spinner /> : <CountryList cities={cities} />}
