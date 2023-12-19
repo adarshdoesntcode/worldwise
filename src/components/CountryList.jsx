@@ -1,8 +1,12 @@
 import styles from "./CountryList.module.css";
 import CountryItem from "./CountryItem";
 import Message from "./Message";
+import Spinner from "./Spinner";
+import { useApp } from "../contexts/AppProvider";
 
-function CountryList({ cities }) {
+function CountryList() {
+  const { cities, isLoading } = useApp();
+  isLoading && <Spinner />;
   if (!cities.length) return <Message message="Add your first Country" />;
 
   const countries = cities.reduce((array, city) => {

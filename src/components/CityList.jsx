@@ -2,8 +2,14 @@ import styles from "./CityList.module.css";
 import CityItem from "./CityItem";
 import Message from "./Message";
 import { Outlet } from "react-router-dom";
+import Spinner from "./Spinner";
+import { useApp } from "../contexts/AppProvider";
 
-function CityList({ cities }) {
+function CityList() {
+  const { cities, isLoading } = useApp();
+
+  if (isLoading) return <Spinner />;
+
   if (!cities.length) return <Message message="Add your first city" />;
 
   <Outlet />;
