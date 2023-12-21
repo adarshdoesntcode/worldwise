@@ -1,12 +1,12 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
+import { AppContext } from "./useAppContext";
 
 const SERVER_URL = "http://localhost:9000";
-
-const AppContext = createContext();
 
 function AppProvider({ children }) {
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCity, setCurrentCity] = useState({});
 
   useEffect(() => {
     const controller = new AbortController();
@@ -32,11 +32,26 @@ function AppProvider({ children }) {
     };
   }, []);
 
+  const getCity = async (id) => {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${SERVER_URL}/cities/${id}`);
+      const data = await res.json();
+      setCurrentCity(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
         cities,
         isLoading,
+        getCity,
+        currentCity,
       }}
     >
       {children}
@@ -44,11 +59,4 @@ function AppProvider({ children }) {
   );
 }
 
-const useApp = () => {
-  const context = useContext(AppContext);
-  if (context === undefined)
-    throw new Error("using useApp outside AppProvider");
-  return context;
-};
-
-export { AppProvider, useApp };
+export { AppProvider };

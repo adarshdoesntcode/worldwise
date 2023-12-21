@@ -2,10 +2,10 @@ import styles from "./CountryList.module.css";
 import CountryItem from "./CountryItem";
 import Message from "./Message";
 import Spinner from "./Spinner";
-import { useApp } from "../contexts/AppProvider";
+import { useAppProvider } from "../contexts/useAppContext";
 
 function CountryList() {
-  const { cities, isLoading } = useApp();
+  const { cities, isLoading } = useAppProvider();
   isLoading && <Spinner />;
   if (!cities.length) return <Message message="Add your first Country" />;
 

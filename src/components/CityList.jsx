@@ -3,10 +3,10 @@ import CityItem from "./CityItem";
 import Message from "./Message";
 import { Outlet } from "react-router-dom";
 import Spinner from "./Spinner";
-import { useApp } from "../contexts/AppProvider";
+import { useAppProvider } from "../contexts/useAppContext";
 
 function CityList() {
-  const { cities, isLoading } = useApp();
+  const { cities, isLoading } = useAppProvider();
 
   if (isLoading) return <Spinner />;
 
