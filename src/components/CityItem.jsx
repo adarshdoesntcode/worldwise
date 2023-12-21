@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./CityItem.module.css";
 import { useAppProvider } from "../contexts/useAppContext";
 
