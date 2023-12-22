@@ -2,7 +2,7 @@ import styles from "./CountryList.module.css";
 import CountryItem from "./CountryItem";
 import Message from "./Message";
 import Spinner from "./Spinner";
-import { useAppProvider } from "../contexts/useAppContext";
+import { useAppProvider } from "../hooks/useAppContext";
 
 function CountryList() {
   const { cities, isLoading } = useAppProvider();

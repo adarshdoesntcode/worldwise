@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AppContext } from "./useAppContext";
+import { AppContext } from "../hooks/useAppContext";
 
 const SERVER_URL = "http://localhost:9000";
 

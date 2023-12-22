@@ -3,7 +3,7 @@ import CityItem from "./CityItem";
 import Message from "./Message";
 import { Outlet } from "react-router-dom";
 import Spinner from "./Spinner";
-import { useAppProvider } from "../contexts/useAppContext";
+import { useAppProvider } from "../hooks/useAppContext";
 
 function CityList() {
   const { cities, isLoading } = useAppProvider();

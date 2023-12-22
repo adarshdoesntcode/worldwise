@@ -9,12 +9,12 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { useEffect, useState } from "react";
-import { useAppProvider } from "../contexts/useAppContext";
+import { useAppProvider } from "../hooks/useAppContext";
 import { useGeolocation } from "../hooks/useGeolocation";
 import Button from "./Button";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 
 function Map() {
-  const [searchParms, setSearchParams] = useSearchParams();
   const { cities } = useAppProvider();
   const {
     getPosition,
@@ -23,8 +23,7 @@ function Map() {
   } = useGeolocation();
   const [mapPosition, setMapPosition] = useState([40, 0]);
 
-  const lat = searchParms.get("lat");
-  const lng = searchParms.get("lng");
+  const [lat, lng] = useUrlPosition();
 
   useEffect(() => {
     if (lat && lng) setMapPosition([lat, lng]);
