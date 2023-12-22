@@ -64,6 +64,25 @@ function AppProvider({ children }) {
     }
   };
 
+  const deleteCity = async (id) => {
+    try {
+      setIsLoading(true);
+      await fetch(`${SERVER_URL}/cities/${id}`, {
+        method: "DELETE",
+      });
+
+      setCities((prev) =>
+        prev.filter((city) => {
+          return city.id !== id;
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -71,6 +90,7 @@ function AppProvider({ children }) {
         isLoading,
         getCity,
         createCity,
+        deleteCity,
         currentCity,
       }}
     >
