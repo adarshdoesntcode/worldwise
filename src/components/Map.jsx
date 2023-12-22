@@ -13,6 +13,8 @@ import { useAppProvider } from "../hooks/useAppContext";
 import { useGeolocation } from "../hooks/useGeolocation";
 import Button from "./Button";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import { useAuthProvider } from "../hooks/useAuthContext";
+import User from "./User";
 
 function Map() {
   const { cities } = useAppProvider();
@@ -21,6 +23,7 @@ function Map() {
     position: geolocationPosition,
     isLoading: isLoadingGeo,
   } = useGeolocation();
+  const { isAuthenticated } = useAuthProvider();
   const [mapPosition, setMapPosition] = useState([40, 0]);
 
   const [lat, lng] = useUrlPosition();
@@ -37,11 +40,12 @@ function Map() {
   return (
     <div className={styles.mapContainer}>
       {!geolocationPosition && (
-        <Button type="position" onClick={getPosition}>
+        <Button type="position" onClick={() => getPosition}>
           {isLoadingGeo ? "loading" : "Use my position"}
         </Button>
       )}
 
+      <User />
       <MapContainer
         center={mapPosition}
         zoom={8}

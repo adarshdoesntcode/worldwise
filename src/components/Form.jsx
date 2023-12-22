@@ -34,7 +34,7 @@ function Form() {
   const [emoji, setEmoji] = useState("");
   const [lat, lng] = useUrlPosition();
   const [errorMessage, setErrorMessage] = useState("");
-  const { createCity, isLoading, setCities } = useAppProvider();
+  const { createCity, isLoading } = useAppProvider();
   const navigate = useNavigate();
   useEffect(() => {
     async function fetchLocationName() {
