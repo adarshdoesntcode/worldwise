@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 import { AppContext } from "../hooks/useAppContext";
 
 const SERVER_URL = "http://localhost:9000";
@@ -71,18 +71,21 @@ function AppProvider({ children }) {
     };
   }, []);
 
-  const getCity = async (id) => {
-    if (Number(id) === currentCity.id) return;
-    try {
-      dispatch({ type: "loading" });
-      const res = await fetch(`${SERVER_URL}/cities/${id}`);
-      const data = await res.json();
-      dispatch({ type: "city/loaded", payload: data });
-    } catch (error) {
-      console.log(error);
-      dispatch({ type: "rejected" });
-    }
-  };
+  const getCity = useCallback(
+    async (id) => {
+      if (Number(id) === currentCity.id) return;
+      try {
+        dispatch({ type: "loading" });
+        const res = await fetch(`${SERVER_URL}/cities/${id}`);
+        const data = await res.json();
+        dispatch({ type: "city/loaded", payload: data });
+      } catch (error) {
+        console.log(error);
+        dispatch({ type: "rejected" });
+      }
+    },
+    [currentCity.id]
+  );
 
   const createCity = async (newCity) => {
     try {
